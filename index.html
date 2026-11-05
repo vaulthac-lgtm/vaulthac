@@ -3,17 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var t=localStorage.getItem('vh-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('vh-theme');document.documentElement.dataset.theme=(t==='dark'||t==='navy'||t==='light')?t:'light'}catch(e){}</script>
 <title>VAULT HAC – Learn Technology. Master the Basics. Understand the Markets.</title>
 <meta name="description" content="VAULT HAC is an online learning platform for computer basics, cybersecurity awareness and beginner forex education, with video lessons on YouTube.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root,:root[data-theme=dark]{--bg:#0B0F14;--panel:#060a10;--line:#16314a;--cyan:#00D1FF;--rgb:0,209,255;--text:#eaf6ff;--mut:#9fb3c8;--btnText:#021018;--hbg:rgba(6,10,16,.95);color-scheme:dark}
+:root[data-theme=dark]{--bg:#0B0F14;--panel:#060a10;--line:#16314a;--cyan:#00D1FF;--rgb:0,209,255;--text:#eaf6ff;--mut:#9fb3c8;--btnText:#021018;--hbg:rgba(6,10,16,.95);color-scheme:dark}
 :root[data-theme=navy]{--bg:#060d1f;--panel:#02060f;--line:#12324f;--cyan:#22d3ee;--rgb:34,211,238;--text:#eaf6ff;--mut:#9db4c8;--btnText:#021018;--hbg:rgba(2,6,15,.95);color-scheme:dark}
-:root[data-theme=light]{--bg:#f3f7fb;--panel:#ffffff;--line:#c9d7e5;--cyan:#0066FF;--rgb:0,102,255;--text:#0B0F14;--mut:#43566b;--btnText:#ffffff;--hbg:rgba(255,255,255,.95);color-scheme:light}
+:root,:root[data-theme=light]{--bg:#f3f7fb;--panel:#ffffff;--line:#c9d7e5;--cyan:#0066FF;--rgb:0,102,255;--text:#0B0F14;--mut:#43566b;--btnText:#ffffff;--hbg:rgba(255,255,255,.95);color-scheme:light}
 :root[data-theme=light] .hero h1,:root[data-theme=light] .logo,:root[data-theme=light] .btn{text-shadow:none!important;box-shadow:none!important}
-@media(prefers-color-scheme:light){:root:not([data-theme]){--bg:#f3f7fb;--panel:#ffffff;--line:#c9d7e5;--cyan:#0066FF;--rgb:0,102,255;--text:#0B0F14;--mut:#43566b;--btnText:#ffffff;--hbg:rgba(255,255,255,.95);color-scheme:light}:root:not([data-theme]) .hero h1,:root:not([data-theme]) .logo,:root:not([data-theme]) .btn{text-shadow:none!important;box-shadow:none!important}}
 select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit;font-size:.85rem;margin-left:auto}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif}
@@ -52,7 +51,7 @@ form select{margin-left:0;width:100%;padding:11px}.msg{color:var(--cyan);margin:
 </head>
 <body>
 <header><div class="bar"><a class="logo" href="#home"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-4px;margin-right:6px" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><circle cx="12" cy="11" r="2"/></svg>VAULT HAC</a>
-<nav aria-label="Main"><a href="#home">Home</a><a href="#computer">Computer Basics</a><a href="#forex">Forex Education</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Platforms</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a></nav><select id="theme" aria-label="Theme"><option value="auto">Theme: Auto</option><option value="dark">Dark</option><option value="light">Light</option><option value="navy">Midnight</option></select></div></header>
+<nav aria-label="Main"><a href="#home">Home</a><a href="#computer">Computer Basics</a><a href="#forex">Forex Education</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Platforms</a><a href="#updates">Updates</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a></nav><select id="theme" aria-label="Theme"><option value="light">Theme: Light</option><option value="dark">Dark</option><option value="navy">Midnight</option></select></div></header>
 <main>
 <section id="home" class="hero">
 <p class="tag">Protect. Innovate. Empower.</p>
@@ -98,10 +97,12 @@ form select{margin-left:0;width:100%;padding:11px}.msg{color:var(--cyan);margin:
 <h3 class="grp">Our Ethical Commitment</h3>
 <p class="warn" style="margin-top:0">VAULT HAC only tests systems when the owner has explicitly authorized the work. We respect privacy, protect sensitive information, disclose vulnerabilities responsibly, and follow applicable laws and platform rules. Our teaching focuses on prevention, safe demonstrations, legal practice labs, and responsible use.</p>
 <h3 class="grp">From the Founder</h3>
-<p style="max-width:44em">I am the founder and visionary behind VAULT HAC. As a BCSIT student, I am committed to learning, innovating, and using technology to make a positive difference. My passion is to protect people against cyber threats through ethical cybersecurity, develop practical technological solutions, and empower others with computer literacy and programming skills.</p>
+<p style="max-width:44em">I am the founder and visionary behind VAULT HAC. I am committed to learning, innovating, and using technology to make a positive difference. My passion is to protect people against cyber threats through ethical cybersecurity, develop practical technological solutions, and empower others with computer literacy and programming skills.</p>
 <p style="max-width:44em">I believe that knowledge creates opportunity, determination turns vision into action, and technology should be used responsibly to serve humanity.</p>
 <p class="warn" style="font-style:italic">“My journey begins with learning, grows through discipline, and aims to leave a lasting impact through technology.”</p>
 <p class="tag">Learn ethically. Innovate responsibly. Build a safer digital world.</p></section>
+
+<section id="updates"><h2>Latest Updates</h2><div id="g-posts" class="grid"></div></section>
 
 <section id="help"><h2>Ask a Question or Report an Issue</h2><p class="sub">Stuck on a lesson, found a problem, or have a question? Send it here. Common answers are posted below.</p>
 <form id="qf" method="post"><div><label for="qt">Type</label><select id="qt" name="type"><option>Question</option><option>Issue or problem</option><option>Lesson request</option></select></div><div><label for="qn">Name (optional)</label><input id="qn" name="name"></div><div><label for="qe">Email (so we can reply)</label><input id="qe" name="email" type="email" required></div><div><label for="qm">Your message</label><textarea id="qm" name="message" rows="5" required></textarea></div><button class="btn main" type="submit">Send</button><p class="msg" role="status"></p></form>
@@ -117,7 +118,7 @@ form select{margin-left:0;width:100%;padding:11px}.msg{color:var(--cyan);margin:
 <footer>© VAULT HAC. Protect. Innovate. Empower.</footer>
 
 <script>
-let LESSONS=[],LATEST={hac:[],disc:[]},PLATFORMS=[],FAQS=[],FORM_ACTION="";
+let LESSONS=[],LATEST={hac:[],disc:[]},PLATFORMS=[],FAQS=[],POSTS=[],FORM_ACTION="";
 let db=null,fs=null;
 const FB = {apiKey:"AIzaSyC1eHAw4SlWkldp7TYfOMVFrC3vPir6sLY",authDomain:"vaulthac-cb104.firebaseapp.com",projectId:"vaulthac-cb104",storageBucket:"vaulthac-cb104.firebasestorage.app",messagingSenderId:"594172120817",appId:"1:594172120817:web:7ef9c46604d63c25492350"};
 const G = "https://www.gstatic.com/firebasejs/10.14.1";
@@ -151,15 +152,16 @@ fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonCard).join(""), "
 
 fill("#g-plat", PLATFORMS.filter(p => p.live && p.url).map(p => `<article class="card"><h3>${esc(p.name)}</h3><p>${esc(p.handle)}</p>${p.url ? `<a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">Visit ${esc(p.name)}</a>` : `<p class="soon">Coming soon</p>`}</article>`).join(""), "Links coming soon.");
 
+fill("#g-posts", POSTS.map(p => `<article class="card"><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p>${p.media ? `<a class="btn" href="${esc(p.media)}" target="_blank" rel="noopener">Open</a>` : ""}<p class="soon">${esc(p.date||"")}</p></article>`).join(""), "No updates yet.");
 fill("#g-faq", FAQS.map(f => `<details class="card"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join(""), "No answered questions yet.");
 }
 
 const sel = $("#theme");
-sel.value = document.documentElement.dataset.theme || "auto";
+sel.value = document.documentElement.dataset.theme || "light";
 sel.addEventListener("change", () => {
   const v = sel.value;
-  if (v === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = v;
-  try { v === "auto" ? localStorage.removeItem("vh-theme") : localStorage.setItem("vh-theme", v); } catch (e) {}
+  document.documentElement.dataset.theme = v;
+  try { localStorage.setItem("vh-theme", v); } catch (e) {}
 });
 
 document.addEventListener("click", e => {
@@ -199,7 +201,7 @@ async function boot() {
     if (snap.exists()) c = JSON.parse(snap.data().json);
   } catch (e) {}
   if (!c) { try { const r = await fetch("content.json", {cache:"no-store"}); if (r.ok) c = await r.json(); } catch (e) {} }
-  if (c) { LESSONS = c.lessons || []; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || []; FAQS = c.faqs || []; FORM_ACTION = c.formAction || ""; }
+  if (c) { LESSONS = c.lessons || []; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || []; FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || ""; }
   render();
 }
 boot();
