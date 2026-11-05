@@ -55,5 +55,19 @@
   }
  ],
  "faqs": [],
- "formAction": ""
+ "formAction": "",
+ "groups": [
+  {
+   "id": "computer",
+   "name": "Computer basics"
+  },
+  {
+   "id": "cyber",
+   "name": "Cybersecurity"
+  },
+  {
+   "id": "forex",
+   "name": "Forex"
+  }
+ ]
 }

@@ -131,7 +131,7 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 <footer>© VAULT HAC. Protect. Innovate. Empower.</footer>
 
 <script>
-let LESSONS=[],LATEST={hac:[],disc:[]},PLATFORMS=[],FAQS=[],POSTS=[],FORM_ACTION="";
+let GROUPS=[{id:"computer",name:"Computer basics"},{id:"cyber",name:"Cybersecurity"},{id:"forex",name:"Forex"}],LESSONS=[],LATEST={hac:[],disc:[]},PLATFORMS=[],FAQS=[],POSTS=[],FORM_ACTION="";
 let db=null,fs=null;
 const FB = {apiKey:"AIzaSyC1eHAw4SlWkldp7TYfOMVFrC3vPir6sLY",authDomain:"vaulthac-cb104.firebaseapp.com",projectId:"vaulthac-cb104",storageBucket:"vaulthac-cb104.firebasestorage.app",messagingSenderId:"594172120817",appId:"1:594172120817:web:7ef9c46604d63c25492350"};
 const G = "https://www.gstatic.com/firebasejs/10.14.1";
@@ -156,8 +156,11 @@ function lessonCard(l){
 function fill(sel, html, emptyMsg){ $(sel).innerHTML = html || `<p class="empty">${emptyMsg}</p>`; }
 
 function render(){
-const GN={computer:"Computer Skills",cyber:"Cybersecurity Awareness",forex:"Forex Education"};
-fill("#g-lessons", ["computer","cyber","forex"].map(c => { const L=LESSONS.filter(l => l.cat === c); return L.length ? `<h3 class="grp">${GN[c]}</h3>${c==="forex" ? '<img class="ban sm" src="support-resistance.webp" alt="Support and resistance: trade with confidence" width="503" height="221" loading="lazy" style="margin-bottom:16px">' : ""}<div class="grid">${L.map(lessonCard).join("")}</div>` : ""; }).join("") + (LESSONS.some(l => l.cat === "forex") ? '<p class="warn"><strong>Risk disclaimer:</strong> Forex trading carries substantial risk and you can lose money. Educational content does not guarantee profits. Practice on a demo account before using real money.</p>' : ""), "Lessons coming soon.");
+const isFx=n => /forex/i.test(n||"");
+const known=new Set(GROUPS.map(g => g.id)), gl=GROUPS.slice();
+if (LESSONS.some(l => !known.has(l.cat))) gl.push({id:"__other",name:"Other lessons"});
+const inG=(g,l) => g.id==="__other" ? !known.has(l.cat) : l.cat===g.id;
+fill("#g-lessons", gl.map(g => { const L=LESSONS.filter(l => inG(g,l)); return L.length ? `<h3 class="grp">${esc(g.name)}</h3>${isFx(g.name) ? '<img class="ban sm" src="support-resistance.webp" alt="Support and resistance: trade with confidence" width="503" height="221" loading="lazy" style="margin-bottom:16px">' : ""}<div class="grid">${L.map(lessonCard).join("")}</div>` : ""; }).join("") + (gl.some(g => isFx(g.name) && LESSONS.some(l => inG(g,l))) ? '<p class="warn"><strong>Risk disclaimer:</strong> Forex trading carries substantial risk and you can lose money. Educational content does not guarantee profits. Practice on a demo account before using real money.</p>' : ""), "Lessons coming soon.");
 fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonCard).join(""), "Lessons with videos will appear here as soon as you add their YouTube links.");
 ["hac","disc"].forEach(k => fill("#l-"+k, LATEST[k].map(v => {
   const id = ytId(v.url); if(!id) return "";
@@ -220,7 +223,7 @@ async function boot() {
     if (snap.exists()) c = JSON.parse(snap.data().json);
   } catch (e) {}
   if (!c) { try { const r = await fetch("content.json", {cache:"no-store"}); if (r.ok) c = await r.json(); } catch (e) {} }
-  if (c) { LESSONS = c.lessons || []; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || []; FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || ""; }
+  if (c) { LESSONS = c.lessons || []; if (Array.isArray(c.groups)) GROUPS = c.groups; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || []; FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || ""; }
   render();
 }
 boot();
