@@ -229,7 +229,23 @@ function wire(f, label){
 }
 wire($("#qf"), "Question");
 
+const KEY = "vh-content";
+function applyContent(c) {
+  LESSONS = c.lessons || []; if (Array.isArray(c.groups)) GROUPS = c.groups; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || [];
+  FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || "";
+}
+function offlineBar() {
+  let b = $("#offbar");
+  if (!b) { b = document.createElement("div"); b.id = "offbar"; b.setAttribute("role", "status"); b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:50;background:#0B0F14;color:#eaf6ff;text-align:center;padding:8px 12px;font-size:.85rem"; b.textContent = "You are offline. Showing the last saved content."; document.body.appendChild(b); }
+  b.hidden = navigator.onLine;
+}
+window.addEventListener("online", offlineBar); window.addEventListener("offline", offlineBar);
 async function boot() {
+  // 1. Show the last saved content straight away (works with no internet).
+  let saved = null;
+  try { const t = localStorage.getItem(KEY); if (t) saved = JSON.parse(t); } catch (e) {}
+  if (saved) { applyContent(saved); render(); }
+  // 2. Ask the internet for fresh content.
   let c = null;
   try {
     const A = await import(G + "/firebase-app.js");
@@ -238,9 +254,11 @@ async function boot() {
     const snap = await fs.getDoc(fs.doc(db, "site", "content"));
     if (snap.exists()) c = JSON.parse(snap.data().json);
   } catch (e) {}
-  if (!c) { try { const r = await fetch("content.json", {cache:"no-store"}); if (r.ok) c = await r.json(); } catch (e) {} }
-  if (c) { LESSONS = c.lessons || []; if (Array.isArray(c.groups)) GROUPS = c.groups; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || []; FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || ""; }
-  render();
+  // content.json is only a first-visit fallback. It never replaces newer saved content.
+  if (!c && !saved) { try { const r = await fetch("content.json", {cache:"no-store"}); if (r.ok) c = await r.json(); } catch (e) {} }
+  if (c) { applyContent(c); try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} render(); }
+  else if (!saved) render();
+  offlineBar();
 }
 boot();
 </script>
