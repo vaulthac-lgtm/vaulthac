@@ -6,6 +6,13 @@
 <script>try{var t=localStorage.getItem('vh-theme');document.documentElement.dataset.theme=(t==='dark'||t==='navy'||t==='light')?t:'light'}catch(e){}</script>
 <title>VAULT HAC – Learn Technology. Master the Basics. Understand the Markets.</title>
 <meta name="description" content="VAULT HAC is an online learning platform for computer basics, cybersecurity awareness and beginner forex education, with video lessons on YouTube.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0066FF">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="VAULT HAC">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -55,7 +62,8 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 </style>
 </head>
 <body>
-<header><div class="bar"><a class="logo" href="#home"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-4px;margin-right:6px" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><circle cx="12" cy="11" r="2"/></svg>VAULT HAC</a><button id="mb" class="btn mbtn" aria-expanded="false" aria-controls="mp">☰ Menu</button></div><div id="mp" hidden><nav aria-label="Main"><a href="#home">Home</a><a href="#latest">Latest Videos</a><a href="#lessons">Lessons</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Online Platforms</a><a href="#updates">Updates</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></nav><label class="th">Theme<select id="theme" aria-label="Theme"><option value="light">Light</option><option value="dark">Dark</option><option value="navy">Midnight</option></select></label></div></header>
+<header><div class="bar"><a class="logo" href="#home"><img src="icon-192.png" alt="" width="36" height="36" style="vertical-align:-11px;margin-right:9px;border-radius:9px">VAULT HAC</a><button id="mb" class="btn mbtn" aria-expanded="false" aria-controls="mp">☰ Menu</button></div><div id="mp" hidden><nav aria-label="Main"><a href="#home">Home</a><a href="#latest">Latest Videos</a><a href="#lessons">Lessons</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Online Platforms</a><a href="#updates">Updates</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></nav><button id="inst" class="btn main" style="width:100%;margin-top:12px" hidden>Install app</button><p id="insthint" class="soon" hidden>To install on iPhone: tap Share, then Add to Home Screen.</p>
+<label class="th">Theme<select id="theme" aria-label="Theme"><option value="light">Light</option><option value="dark">Dark</option><option value="navy">Midnight</option></select></label></div></header>
 <main>
 <section id="home" class="hero">
 <p class="tag">Protect. Innovate. Empower.</p>
@@ -183,6 +191,12 @@ sel.addEventListener("change", () => {
   try { localStorage.setItem("vh-theme", v); } catch (e) {}
 });
 
+let deferred=null;const inst=$("#inst");
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;inst.hidden=false});
+inst.addEventListener("click",async()=>{if(!deferred)return;deferred.prompt();try{await deferred.userChoice}catch(x){}deferred=null;inst.hidden=true});
+window.addEventListener("appinstalled",()=>{inst.hidden=true;deferred=null});
+if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!navigator.standalone)$("#insthint").hidden=false;
+if("serviceWorker" in navigator&&location.protocol!=="file:")window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 const mb=$("#mb"), mp=$("#mp");
 const setMenu=o=>{mp.hidden=!o;mb.setAttribute("aria-expanded",o)};
 mb.addEventListener("click",e=>{e.stopPropagation();setMenu(mp.hidden)});
