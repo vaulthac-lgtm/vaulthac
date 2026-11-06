@@ -58,7 +58,7 @@ const OPEN=new Set();
 function closeDots(){document.querySelectorAll(".dm").forEach(x=>x.hidden=true)}
 const chk=(p,l,v)=>`<label><input type="checkbox" data-p="${p}" ${v?"checked":""}>${l}</label>`;
 const item=(key,title,body,delA)=>`<div class="box item"><div class="ih"><button class="tg" data-a="tg" data-key="${key}">${OPEN.has(key)?"▾":"▸"} ${esc(title||"(untitled)")}</button><span class="dw"><button class="dots" data-a="dots" aria-label="More options">⋯</button><div class="dm" hidden><button class="del" ${delA}>Delete</button></div></span></div><div class="ib" ${OPEN.has(key)?"":"hidden"}>${body}</div></div>`;
-const DG=[{id:"computer",name:"Computer basics"},{id:"cyber",name:"Cybersecurity"},{id:"forex",name:"Forex"}];
+const DG=[{id:"computer",name:"Computer basics"},{id:"digital",name:"Digital skills"},{id:"cyber",name:"Cybersecurity"},{id:"forex",name:"Forex"}];
 const gopts=v=>C.groups.map(g=>`<option value="${esc(g.id)}" ${g.id===v?"selected":""}>${esc(g.name)}</option>`).join("")+`<option value="" ${v?"":"selected"}>Other (no group)</option>`;
 function draw(){
   C.posts=C.posts||[];if(!C.groups)C.groups=DG.map(g=>({...g}));$("#sec").value=cur;
