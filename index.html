@@ -192,7 +192,7 @@ fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonCard).join(""), "
   return `<article class="card"><div class="media">${thumb(id, v.title)}</div><h3>${esc(v.title)}</h3>${v.date ? `<p>${esc(v.date)}</p>` : ""}<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener">Watch Now</a></article>`;
 }).join(""), `No videos added yet. <a href="${CH[k]}/videos" target="_blank" rel="noopener">See the channel’s latest videos on YouTube</a>.`));
 
-fill("#g-plat", PLATFORMS.filter(p => p.live && p.url).map(p => `<a class="chip" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.handle)}">${esc(p.name)}</a>`).join(""), "Links coming soon.");
+fill("#g-plat", PLATFORMS.filter(p => p.live && (p.url || p.handle)).map(p => { const t = esc(p.name) + (p.handle ? " " + esc(p.handle) : ""); return p.url ? `<a class="chip" href="${esc(p.url)}" target="_blank" rel="noopener">${t}</a>` : `<span class="chip">${t}</span>`; }).join(""), "Links coming soon.");
 
 const seenTs = lastSeen();
 fill("#g-posts", POSTS.map(p => `<article class="card"><h3>${esc(p.title)}${tsOf(p) > seenTs ? '<span class="new">NEW</span>' : ""}</h3><p>${esc(p.desc)}</p>${p.media ? `<a class="btn" href="${esc(p.media)}" target="_blank" rel="noopener">Open</a>` : ""}<p class="soon">${esc(p.date||"")}</p></article>`).join(""), "No updates yet.");
