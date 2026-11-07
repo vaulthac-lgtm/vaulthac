@@ -56,26 +56,47 @@ form select{margin-left:0;width:100%;padding:11px}.msg{color:var(--cyan);margin:
 .bar{justify-content:space-between;flex-wrap:nowrap}.mbtn{padding:8px 14px}
 header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 #mp nav{display:flex;flex-direction:column;gap:0}#mp nav a{padding:11px 2px;border-bottom:1px solid var(--line);font-size:1rem}#mp .th{display:block;margin-top:12px}#mp select{margin-top:6px}
+#mp nav a.on{color:var(--cyan);font-weight:700}
 .ban{display:block;width:100%;height:auto;border-radius:14px}.sm{max-width:560px}.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:0 0 10px}.tiles .ban{height:auto}
 [hidden]{display:none!important}
+
+section{padding:28px 16px}
+#home.hero{padding:18px 16px 8px}#home h1{font-size:clamp(1.7rem,6.5vw,3rem);margin:0 0 8px}#home>p:not(.tag){margin:0 0 14px;font-size:1rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+section{scroll-margin-top:66px}
+.tight{padding:6px 16px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#e53935;margin-left:6px;vertical-align:middle}
+.acc{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:0 0 10px}
+.acc>summary{cursor:pointer;list-style:none;padding:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary::after{content:"+";font-size:1.4rem;color:var(--cyan);line-height:1}
+.acc[open]>summary::after{content:"\2212"}
+.accb{padding:0 14px 14px}
+.hrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 10px;-webkit-overflow-scrolling:touch}
+.hrow .card{flex:0 0 152px;padding:8px;scroll-snap-align:start}
+.hrow .thumb{margin-bottom:6px}.hrow .play{font-size:1.4rem}
+.hrow h3{font-size:.8rem;line-height:1.25;margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hrow p{font-size:.7rem;margin:0 0 4px}
+.hrow .btn{display:block;text-align:center;padding:5px 8px;font-size:.75rem}
+.hrow .empty{flex:1 0 100%}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--text);text-decoration:none;font-size:.9rem}
+.new{display:inline-block;background:#e53935;color:#fff;font-size:.65rem;font-weight:700;padding:1px 7px;border-radius:99px;margin-left:6px;vertical-align:middle}
+#toast{position:fixed;top:10px;left:10px;right:10px;max-width:520px;margin:0 auto;z-index:60;background:#0B0F14;color:#eaf6ff;border:1px solid #00D1FF;border-radius:12px;padding:12px 14px;box-shadow:0 8px 28px rgba(0,0,0,.4);touch-action:pan-y;cursor:pointer;transition:transform .2s,opacity .2s}
+#toast b{display:block;color:#00D1FF;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase}
+#toast small{display:block;color:#9fb3c8;margin-top:2px;font-size:.75rem}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<header><div class="bar"><a class="logo" href="#home"><img src="icon-192.png" alt="" width="36" height="36" style="vertical-align:-11px;margin-right:9px;border-radius:9px">VAULT HAC</a><button id="mb" class="btn mbtn" aria-expanded="false" aria-controls="mp">☰ Menu</button></div><div id="mp" hidden><nav aria-label="Main"><a href="#home">Home</a><a href="#latest">Latest Videos</a><a href="#lessons">Lessons</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Online Platforms</a><a href="#updates">Updates</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></nav><button id="inst" class="btn main" style="width:100%;margin-top:12px" hidden>Install app</button><p id="insthint" class="soon" hidden>To install on iPhone: tap Share, then Add to Home Screen.</p>
+<header><div class="bar"><a class="logo" href="#home"><img src="icon-192.png" alt="" width="36" height="36" style="vertical-align:-11px;margin-right:9px;border-radius:9px">VAULT HAC</a><button id="mb" class="btn mbtn" aria-expanded="false" aria-controls="mp">☰ Menu<span id="mdot" class="dot" hidden></span></button></div><div id="mp" hidden><nav aria-label="Main"><a href="#home">Home</a><a href="#latest">Latest Videos</a><a href="#lessons">Lessons</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Online Platforms</a><a href="#updates">Updates</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></nav><button id="inst" class="btn main" style="width:100%;margin-top:12px" hidden>Install app</button><p id="insthint" class="soon" hidden>To install on iPhone: tap Share, then Add to Home Screen.</p>
 <label class="th">Theme<select id="theme" aria-label="Theme"><option value="light">Light</option><option value="dark">Dark</option><option value="navy">Midnight</option></select></label></div></header>
 <main>
-<section id="home" class="hero">
-<p class="tag">Protect. Innovate. Empower.</p>
-<h1>Learn Technology. Master the Basics. Understand the Markets.</h1>
-<p>Welcome to VAULT HAC. Learn digital skills, cybersecurity awareness and technology through simple lessons and videos.</p>
-<div class="row"><a class="btn main" href="#lessons">Start Learning</a><a class="btn" href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">Watch on YouTube</a></div>
-<img class="ban" src="welcome.webp" alt="Welcome to VAULT HAC. Learn, practice, grow. Protect, innovate, empower." width="813" height="348"  style="max-width:680px;margin-top:28px">
-</section>
+<section id="home" class="hero"><h1>Learn Technology. Master the Basics. Understand the Markets.</h1><p>Welcome to VAULT HAC. Learn digital skills, cybersecurity awareness and technology through simple lessons and videos.</p><img class="ban" src="welcome.webp" alt="VAULT HAC. Learn, Trade, Grow. Protect, Innovate and Empower. Computer Basics and Forex Trading Basics." width="1280" height="720" style="margin:0;max-width:1100px"><p class="tag" style="margin:12px 0 0">Protect. Innovate. Empower.</p></section>
 
-<section id="latest"><h2>Latest Videos</h2><p class="sub">New uploads from both channels. Press play to watch here, or open the video on YouTube.</p>
-<h3 class="grp">VAULT HAC: Computer Skills and Forex Education</h3><div class="grid" id="l-hac"></div>
-<h3 class="grp">VAULT DISCOVERIES: Facts, Technology and Discoveries</h3><div class="grid" id="l-disc"></div></section>
+<section id="latest"><h2>Latest Videos</h2><p class="sub" style="margin-bottom:12px">Tap a video to play it. Slide sideways for more.</p>
+<h3 class="grp" style="font-size:1rem;margin:10px 0 6px">VAULT HAC</h3><div class="hrow" id="l-hac"></div>
+<h3 class="grp" style="font-size:1rem;margin:10px 0 6px">VAULT DISCOVERIES</h3><div class="hrow" id="l-disc"></div></section>
 
 <section id="lessons"><h2>Lessons</h2><p class="sub">New lessons are added regularly.</p><div id="g-lessons"></div></section>
 
@@ -89,15 +110,13 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 <div class="row"><a class="btn main" href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">Subscribe to VAULT DISCOVERIES</a><a class="btn" href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">Explore Discoveries</a><a class="btn" href="https://www.youtube.com/@vaultdiscoveries/videos" target="_blank" rel="noopener">Watch Videos</a></div></div>
 </div></section>
 
-<section id="platforms"><h2>Online Platforms</h2><div class="grid" id="g-plat"></div></section>
+<section id="platforms"><h2>Online Platforms</h2><div class="chips" id="g-plat"></div></section>
 
 
 <section id="updates"><h2>Latest Updates</h2><img class="ban sm" src="knowledge-power.webp" alt="Knowledge is power. Keep learning with VAULT HAC." width="461" height="243" loading="lazy" style="margin-bottom:20px"><div id="g-posts" class="grid"></div></section>
 
-<section id="help"><h2>Ask a Question or Report an Issue</h2><p class="sub">Stuck on a lesson, found a problem, or have a question? Send it here. Common answers are posted below.</p>
-<form id="qf" method="post"><div><label for="qt">Type</label><select id="qt" name="type"><option>Question</option><option>Issue or problem</option><option>Lesson request</option></select></div><div><label for="qn">Name (optional)</label><input id="qn" name="name"></div><div><label for="qe">Email (so we can reply)</label><input id="qe" name="email" type="email" required></div><div><label for="qm">Your message</label><textarea id="qm" name="message" rows="5" required></textarea></div><button class="btn main" type="submit">Send</button><p class="msg" role="status"></p></form>
-<h3 class="grp">Answered Questions</h3><div id="g-faq"></div></section>
-<section id="about"><h2>About VAULT HAC</h2><p class="tag">Protect. Innovate. Empower.</p>
+<section id="help" class="tight"><details class="acc" id="ask-d"><summary>Ask a question or report an issue</summary><div class="accb"><form id="qf" method="post"><div><label for="qt">Type</label><select id="qt" name="type"><option>Question</option><option>Issue or problem</option><option>Lesson request</option></select></div><div><label for="qn">Name (optional)</label><input id="qn" name="name"></div><div><label for="qe">Email (so we can reply)</label><input id="qe" name="email" type="email" required></div><div><label for="qm">Your message</label><textarea id="qm" name="message" rows="5" required></textarea></div><button class="btn main" type="submit">Send</button><p class="msg" role="status"></p></form></div></details><details class="acc"><summary>Answered questions</summary><div class="accb"><div id="g-faq"></div></div></details></section>
+<section id="about" class="tight"><details class="acc"><summary>About VAULT HAC</summary><div class="accb"><p class="tag">Protect. Innovate. Empower.</p>
 <p style="max-width:44em">VAULT HAC is an emerging technology and digital education brand that helps people learn, build, and stay safer online through responsible cybersecurity practices and practical teaching.</p>
 <p style="max-width:44em">“Vault” stands for protection and safeguarding valuable information. “HAC” stands for hacker, meaning an ethical hacker who works responsibly and with permission.</p>
 <div class="two" style="margin-top:20px"><div class="card"><h3>Our Vision</h3><p>To become a trusted and innovative technology brand that creates a safer digital world by advancing cybersecurity, developing useful technological solutions, and empowering people with practical digital skills.</p></div><div class="card"><h3>Our Mission</h3><p>To protect individuals and organizations from cyber threats through ethical and responsible cybersecurity practices; develop innovative technology solutions; and equip people with essential computer skills, programming knowledge, and digital awareness through accessible, practical education.</p></div></div>
@@ -108,18 +127,14 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 <p style="max-width:44em">I am the founder and visionary behind VAULT HAC. I am committed to learning, innovating, and using technology to make a positive difference. My passion is to protect people against cyber threats through ethical cybersecurity, develop practical technological solutions, and empower others with computer literacy and programming skills.</p>
 <p style="max-width:44em">I believe that knowledge creates opportunity, determination turns vision into action, and technology should be used responsibly to serve humanity.</p>
 <p class="warn" style="font-style:italic">“My journey begins with learning, grows through discipline, and aims to leave a lasting impact through technology.”</p>
-<p class="tag">Learn ethically. Innovate responsibly. Build a safer digital world.</p></section>
+<p class="tag">Learn ethically. Innovate responsibly. Build a safer digital world.</p></div></details></section>
 
-<section id="contact"><h2>Contact</h2><p class="sub">Reach us directly. We reply as soon as we can.</p>
-<div class="grid">
-<div class="card"><h3>Email</h3><p><a href="mailto:vaulthac@gmail.com">vaulthac@gmail.com</a></p><p><a href="mailto:wankyarahman23@gmail.com">wankyarahman23@gmail.com</a></p></div>
-<div class="card"><h3>Call or WhatsApp</h3><p>Both numbers are on WhatsApp.</p>
-<p><a href="tel:+256709885711">+256 709 885 711</a></p><div class="row" style="margin:0 0 14px"><a class="btn main" href="https://wa.me/256709885711" target="_blank" rel="noopener">WhatsApp</a></div>
-<p><a href="tel:+256771062378">+256 771 062 378</a></p><div class="row" style="margin:0"><a class="btn main" href="https://wa.me/256771062378" target="_blank" rel="noopener">WhatsApp</a></div></div>
-<div class="card"><h3>YouTube</h3><p><a href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">youtube.com/@vaulthac</a></p><p><a href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">youtube.com/@vaultdiscoveries</a></p></div>
-</div></section>
+<section id="contact" class="tight"><h2 style="margin:14px 0 8px">Contact</h2>
+<p class="sub" style="margin-bottom:8px">Email us, or message or call us on WhatsApp.</p>
+<div class="chips" style="margin-bottom:8px"><a class="chip" href="mailto:vaulthac@gmail.com">vaulthac@gmail.com</a><a class="chip" href="mailto:wankyarahman23@gmail.com">wankyarahman23@gmail.com</a></div>
+<div class="chips"><a class="chip" href="https://wa.me/256709885711" target="_blank" rel="noopener">WhatsApp +256 709 885 711</a><a class="chip" href="tel:+256709885711">Call</a><a class="chip" href="https://wa.me/256771062378" target="_blank" rel="noopener">WhatsApp +256 771 062 378</a><a class="chip" href="tel:+256771062378">Call</a></div></section>
 
-<section id="privacy"><h2>Privacy Notice</h2><p class="sub">Last updated: November 2026</p>
+<section id="privacy" class="tight"><details class="acc"><summary>Privacy Notice</summary><div class="accb"><p class="sub">Last updated: November 2026</p>
 <div style="max-width:44em;color:var(--mut)">
 <h3 class="grp" style="margin-top:8px">What we collect</h3>
 <p>We collect only what you choose to send through the “Ask a Question or Report an Issue” form: your message, your email address, and your name if you add it. We do not ask for passwords, payment details or other sensitive information. Please do not include them in your message.</p>
@@ -127,7 +142,7 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 <p>Your details are used only to read and reply to your message and, with your approval, to publish an answer without your personal details. We do not sell, rent or share your information for advertising.</p>
 <h3 class="grp">Educational purpose</h3>
 <p>VAULT HAC content is for education and awareness. We encourage lawful and ethical use of all knowledge shared here.</p>
-</div></section>
+</div></div></details></section>
 </main>
 <footer>© VAULT HAC. Protect. Innovate. Empower.</footer>
 
@@ -177,9 +192,10 @@ fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonCard).join(""), "
   return `<article class="card"><div class="media">${thumb(id, v.title)}</div><h3>${esc(v.title)}</h3>${v.date ? `<p>${esc(v.date)}</p>` : ""}<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener">Watch Now</a></article>`;
 }).join(""), `No videos added yet. <a href="${CH[k]}/videos" target="_blank" rel="noopener">See the channel’s latest videos on YouTube</a>.`));
 
-fill("#g-plat", PLATFORMS.filter(p => p.live && p.url).map(p => `<article class="card"><h3>${esc(p.name)}</h3><p>${esc(p.handle)}</p>${p.url ? `<a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">Visit ${esc(p.name)}</a>` : `<p class="soon">Coming soon</p>`}</article>`).join(""), "Links coming soon.");
+fill("#g-plat", PLATFORMS.filter(p => p.live && p.url).map(p => `<a class="chip" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.handle)}">${esc(p.name)}</a>`).join(""), "Links coming soon.");
 
-fill("#g-posts", POSTS.map(p => `<article class="card"><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p>${p.media ? `<a class="btn" href="${esc(p.media)}" target="_blank" rel="noopener">Open</a>` : ""}<p class="soon">${esc(p.date||"")}</p></article>`).join(""), "No updates yet.");
+const seenTs = lastSeen();
+fill("#g-posts", POSTS.map(p => `<article class="card"><h3>${esc(p.title)}${tsOf(p) > seenTs ? '<span class="new">NEW</span>' : ""}</h3><p>${esc(p.desc)}</p>${p.media ? `<a class="btn" href="${esc(p.media)}" target="_blank" rel="noopener">Open</a>` : ""}<p class="soon">${esc(p.date||"")}</p></article>`).join(""), "No updates yet.");
 fill("#g-faq", FAQS.map(f => `<details class="card"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join(""), "No answered questions yet.");
 }
 
@@ -200,7 +216,7 @@ if("serviceWorker" in navigator&&location.protocol!=="file:")window.addEventList
 const mb=$("#mb"), mp=$("#mp");
 const setMenu=o=>{mp.hidden=!o;mb.setAttribute("aria-expanded",o)};
 mb.addEventListener("click",e=>{e.stopPropagation();setMenu(mp.hidden)});
-mp.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("a"))setMenu(false)});
+mp.addEventListener("click",e=>{e.stopPropagation();const a=e.target.closest("a");if(a){if(a.hash===location.hash||(!location.hash&&a.hash==="#home"))setTimeout(showView,0);setMenu(false)}});
 document.addEventListener("click",()=>setMenu(false));
 document.addEventListener("click", e => {
   const b = e.target.closest(".thumb"); if(!b) return;
@@ -229,10 +245,84 @@ function wire(f, label){
 }
 wire($("#qf"), "Question");
 
+const PAGES = {home:"Home", updates:"Updates", lessons:"Lessons", latest:"Latest Videos", videos:"Video Lessons", channels:"YouTube Channels", platforms:"Online Platforms", help:"Ask a Question", about:"About", contact:"Contact", privacy:"Privacy"};
+const OWN = ["updates","videos","channels"];                  // open on their own screen from the menu
+const ONHOME = ["lessons","latest","platforms","help","about","contact","privacy"]; // shown on the Home screen
+let MENU = Object.keys(PAGES).map(id => ({id, show:true}));
+function mergeMenu(saved) {
+  const out = [], seen = new Set();
+  (Array.isArray(saved) ? saved : []).forEach(m => { if (m && PAGES[m.id] && !seen.has(m.id)) { seen.add(m.id); out.push({id:m.id, show:m.id === "home" ? true : m.show !== false}); } });
+  Object.keys(PAGES).forEach(id => { if (!seen.has(id)) out.push({id, show:true}); });
+  return out;
+}
+const ls = {get:k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set:(k,v) => { try { localStorage.setItem(k,String(v)); } catch (e) {} }};
+const tsOf = p => p.ts || parseInt(String(p.id || "").slice(1), 36) || Date.parse(p.date) || 0;
+const newestTs = () => POSTS.reduce((m,p) => Math.max(m, tsOf(p)), 0);
+const lastSeen = () => +ls.get("vh-seen") || 0;
+function updateDots() {
+  const has = newestTs() > lastSeen();
+  const d = $("#mdot"); if (d) d.hidden = !has;
+  const nav = $("#mp nav");
+  if (nav && nav.querySelector) { const a = nav.querySelector('a[href="#updates"]'); if (a) a.innerHTML = PAGES.updates + (has ? '<span class="dot"></span>' : ""); }
+}
+function buildMenu() {
+  const nav = $("#mp nav"); if (!nav) return;
+  nav.innerHTML = MENU.filter(m => m.show).map(m => `<a href="#${m.id}">${PAGES[m.id]}</a>`).join("");
+  const main = $("main");
+  if (main && main.appendChild) {   // Home sections follow the menu order, own-screen pages go last
+    MENU.filter(m => ONHOME.includes(m.id)).forEach(m => { const el = $("#" + m.id); if (el) main.appendChild(el); });
+    OWN.forEach(id => { const el = $("#" + id); if (el) main.appendChild(el); });
+  }
+  updateDots(); markActive();
+}
+function currentPage() {
+  const id = (location.hash || "#home").slice(1);
+  return MENU.some(m => m.id === id && m.show) ? id : "home";
+}
+function markActive() {
+  const cur = currentPage(), nav = $("#mp nav"); if (!nav || !nav.querySelectorAll) return;
+  nav.querySelectorAll("a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + cur));
+}
+let firstView = true;
+function showView() {
+  const cur = currentPage(), own = OWN.includes(cur);
+  const shown = id => MENU.some(m => m.id === id && m.show);
+  document.querySelectorAll("main > section").forEach(sec => {
+    sec.hidden = own ? sec.id !== cur : !(sec.id === "home" || (ONHOME.includes(sec.id) && shown(sec.id)));
+  });
+  if (cur === "updates") { ls.set("vh-seen", newestTs()); const t = $("#toast"); if (t && t.remove) t.remove(); updateDots(); }
+  const target = $("#" + cur);
+  if (!own && cur !== "home" && target) {
+    const d = target.querySelector && target.querySelector("details.acc"); if (d) d.open = true;
+    setTimeout(() => target.scrollIntoView({behavior:"smooth", block:"start"}), 30);
+  } else if (!firstView || cur !== "home") window.scrollTo(0, 0);
+  firstView = false; markActive();
+}
+window.addEventListener("hashchange", showView);
+
+function maybeToast() {
+  const n = newestTs(), floor = Math.max(+ls.get("vh-toast") || 0, lastSeen());
+  const old = $("#toast");
+  if (!n || n <= floor || currentPage() === "updates") { if (old && old.remove) old.remove(); return; }
+  const fresh = POSTS.filter(p => tsOf(p) > floor), top = fresh.sort((a,b) => tsOf(b) - tsOf(a))[0];
+  let t = old; if (!t) { t = document.createElement("div"); t.id = "toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+  t.innerHTML = `<b>New update${fresh.length > 1 ? "s (" + fresh.length + ")" : ""}</b>${esc(top.title)}<small>Tap to open. Slide left or right to remove.</small>`;
+  t.style.transform = ""; t.style.opacity = "";
+  let x0 = null, dx = 0;
+  const done = () => { ls.set("vh-toast", n); t.style.transform = `translateX(${dx < 0 ? "-" : ""}120%)`; t.style.opacity = "0"; setTimeout(() => t.remove && t.remove(), 220); };
+  t.onpointerdown = e => { x0 = e.clientX; dx = 0; t.style.transition = "none"; try { t.setPointerCapture(e.pointerId); } catch (x) {} };
+  t.onpointermove = e => { if (x0 === null) return; dx = e.clientX - x0; t.style.transform = `translateX(${dx}px)`; t.style.opacity = String(Math.max(.3, 1 - Math.abs(dx) / 260)); };
+  t.onpointerup = () => {
+    if (x0 === null) return; t.style.transition = ""; const moved = Math.abs(dx); x0 = null;
+    if (moved > 70) done();
+    else { t.style.transform = ""; t.style.opacity = ""; if (moved < 6) { ls.set("vh-toast", n); location.hash = "#updates"; t.remove && t.remove(); } }
+  };
+  t.onpointercancel = () => { x0 = null; t.style.transform = ""; t.style.opacity = ""; };
+}
 const KEY = "vh-content";
 function applyContent(c) {
   LESSONS = c.lessons || []; if (Array.isArray(c.groups)) GROUPS = c.groups; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || [];
-  FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || "";
+  FAQS = (c.faqs || []).filter(f => f.pub === true); POSTS = (c.posts || []).filter(p => p.pub && (!p.expires || p.expires > Date.now())); FORM_ACTION = c.formAction || ""; MENU = mergeMenu(c.menu); buildMenu(); showView(); updateDots(); maybeToast();
 }
 function offlineBar() {
   let b = $("#offbar");
@@ -241,6 +331,7 @@ function offlineBar() {
 }
 window.addEventListener("online", offlineBar); window.addEventListener("offline", offlineBar);
 async function boot() {
+  buildMenu(); showView();
   // 1. Show the last saved content straight away (works with no internet).
   let saved = null;
   try { const t = localStorage.getItem(KEY); if (t) saved = JSON.parse(t); } catch (e) {}

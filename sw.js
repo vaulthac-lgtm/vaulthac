@@ -1,7 +1,7 @@
 // VAULT HAC service worker.
 // Pages are always fetched from the network first, so visitors get your latest changes
 // as soon as you upload them. The cache is only a fallback for when the phone is offline.
-const CACHE = "vaulthac-v2";
+const CACHE = "vaulthac-v3";
 const PRECACHE = ["./", "index.html", "manifest.json", "icon-192.png", "icon-512.png", "welcome.webp"];
 
 self.addEventListener("install", e => {
