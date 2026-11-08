@@ -58,6 +58,18 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 #mp nav{display:flex;flex-direction:column;gap:0}#mp nav a{padding:11px 2px;border-bottom:1px solid var(--line);font-size:1rem}#mp .th{display:block;margin-top:12px}#mp select{margin-top:6px}
 #mp nav a.on{color:var(--cyan);font-weight:700}
 .ban{display:block;width:100%;height:auto;border-radius:14px}.sm{max-width:560px}.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:0 0 10px}.tiles .ban{height:auto}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ltile{display:block;text-align:left;width:100%;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);cursor:pointer;overflow:hidden;font:inherit}
+.lth{display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#0B1B33,#0066FF);position:relative}
+.lth img{width:100%;height:100%;object-fit:cover;display:block}
+.lplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;text-shadow:0 2px 8px #000a}
+.lnone{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#cfe3ff;font-weight:700;letter-spacing:.12em;font-size:.8rem}
+.ltt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:8px 10px;font-weight:600;font-size:.85rem;line-height:1.25}
+.sheet{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}
+.sbox{background:var(--panel);color:var(--text);width:100%;max-width:640px;max-height:92vh;overflow-y:auto;border-radius:16px 16px 0 0;padding:18px 16px 26px;position:relative}
+.sbox h3{margin:0 40px 10px 0}
+.sx{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--text);font-size:1.1rem;cursor:pointer}
+.sbox .files{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 [hidden]{display:none!important}
 
 section{padding:28px 16px}
@@ -100,7 +112,7 @@ section{scroll-margin-top:66px}
 
 <section id="lessons"><h2>Lessons</h2><p class="sub">New lessons are added regularly.</p><div id="g-lessons"></div></section>
 
-<section id="videos"><h2>Video Lessons</h2><p class="sub">Every lesson that has a matching video on the VAULT HAC channel.</p><img class="ban sm" src="video-learning.webp" alt="Learn through videos: watch, learn, apply" width="492" height="221" loading="lazy" style="margin-bottom:18px"><div class="grid" id="g-videos"></div></section>
+<section id="videos"><h2>Video Lessons</h2><p class="sub">Every lesson that has a matching video on the VAULT HAC channel.</p><img class="ban sm" src="video-learning.webp" alt="Learn through videos: watch, learn, apply" width="492" height="221" loading="lazy" style="margin-bottom:18px"><div class="lgrid" id="g-videos"></div></section>
 
 <section id="channels"><h2>YouTube Channels</h2><a href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener" aria-label="Join VAULT HAC on YouTube"><img class="ban sm" src="join.webp" alt="Join VAULT HAC today. Learn, upgrade, achieve." width="507" height="243" loading="lazy" style="margin-bottom:20px"></a>
 <div class="two">
@@ -162,13 +174,29 @@ const watch = id => "https://www.youtube.com/watch?v=" + id;
 function thumb(id, label){
   return `<button class="thumb" data-id="${id}" aria-label="Play video: ${esc(label)}"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt=""><span class="play" aria-hidden="true">▶</span></button>`;
 }
-function lessonCard(l){
+function lessonTile(l){
   const id = ytId(l.video);
-  const media = id
-    ? thumb(id, l.videoTitle || l.title) + (l.videoTitle ? `<p class="vt">${esc(l.videoTitle)}</p>` : "") + `<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener">Watch Lesson on YouTube</a>`
-    : `<p class="soon">Video coming soon</p>`;
-  return `<article class="card" id="${l.id}" style="display:flex;flex-direction:column"><h3>${esc(l.title)}</h3><p>${esc(l.text)}</p><ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul><div class="media">${media}</div></article>`;
+  return `<button class="ltile" data-lid="${esc(l.id)}"><span class="lth">${id ? `<img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""><span class="lplay" aria-hidden="true">▶</span>` : '<span class="lnone">LESSON</span>'}</span><span class="ltt">${esc(l.title)}</span></button>`;
 }
+function closeLesson(){ const x = $("#lsheet"); if (x && x.remove) x.remove(); document.body.style.overflow = ""; }
+function openLesson(lid){
+  const l = LESSONS.find(x => x.id === lid); if (!l) return; closeLesson();
+  const id = ytId(l.video), goals = (l.goals || []).filter(Boolean), files = (l.files || []).filter(f => f && f.url);
+  const el = document.createElement("div"); el.id = "lsheet"; el.className = "sheet"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
+  el.innerHTML = `<div class="sbox"><button class="sx" data-close="1" aria-label="Close">✕</button><h3>${esc(l.title)}</h3>`
+    + (id ? thumb(id, l.videoTitle || l.title) + (l.videoTitle ? `<p class="vt">${esc(l.videoTitle)}</p>` : "") + `<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener" style="margin-top:8px">Watch on YouTube</a>` : "")
+    + (l.text ? `<p style="margin-top:12px">${esc(l.text)}</p>` : "")
+    + (goals.length ? `<ul>${goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>` : "")
+    + (files.length ? `<div class="files"><strong>Files</strong>${files.map(f => `<a class="btn" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.name || "Download file")}</a>`).join("")}</div>` : "")
+    + `</div>`;
+  document.body.appendChild(el); document.body.style.overflow = "hidden";
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest && e.target.closest(".ltile"); if (t) { openLesson(t.dataset.lid); return; }
+  if (e.target.closest && e.target.closest("[data-close]")) { closeLesson(); return; }
+  const sh = $("#lsheet"); if (sh && e.target === sh) closeLesson();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLesson(); });
 function fill(sel, html, emptyMsg){ $(sel).innerHTML = html || `<p class="empty">${emptyMsg}</p>`; }
 
 function render(){
@@ -181,12 +209,12 @@ const groupHtml=g => {
   const L=LESSONS.filter(l => inG(g,l)), im=IMGS.find(x => x[0].test(g.name));
   if (!L.length && !im) return "";
   const top = im ? `<img class="ban sm" src="${im[1]}.webp" alt="${im[2]}" width="${im[3]}" height="${im[4]}" loading="lazy" style="margin-bottom:14px">` : `<h3 class="grp">${esc(g.name)}</h3>`;
-  const body = L.length ? `<div class="grid">${L.map(lessonCard).join("")}</div>` : '<p class="empty">Lessons coming soon.</p>';
+  const body = L.length ? `<div class="lgrid">${L.map(lessonTile).join("")}</div>` : '<p class="empty">Lessons coming soon.</p>';
   const sr = isFx(g.name) && L.length ? '<img class="ban sm" src="support-resistance.webp" alt="Support and resistance: trade with confidence" width="503" height="221" loading="lazy" style="margin-top:18px">' : "";
   return `<div style="margin-bottom:34px">${top}${body}${sr}</div>`;
 };
 fill("#g-lessons", gl.map(groupHtml).join("") + (gl.some(g => isFx(g.name) && LESSONS.some(l => inG(g,l))) ? '<p class="warn"><strong>Risk disclaimer:</strong> Forex trading carries substantial risk and you can lose money. Educational content does not guarantee profits. Practice on a demo account before using real money.</p>' : ""), "Lessons coming soon.");
-fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonCard).join(""), "Lessons with videos will appear here as soon as you add their YouTube links.");
+fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonTile).join(""), "Lessons with videos will appear here as soon as you add their YouTube links.");
 ["hac","disc"].forEach(k => fill("#l-"+k, LATEST[k].map(v => {
   const id = ytId(v.url); if(!id) return "";
   return `<article class="card"><div class="media">${thumb(id, v.title)}</div><h3>${esc(v.title)}</h3>${v.date ? `<p>${esc(v.date)}</p>` : ""}<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener">Watch Now</a></article>`;
