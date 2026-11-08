@@ -43,7 +43,8 @@ a{color:var(--c)}[hidden]{display:none!important}
 let C={lessons:[],latest:{hac:[],disc:[]},platforms:[],faqs:[],formAction:""};
 const $=s=>document.querySelector(s), DK="vh-admin-draft";
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const okLink=u=>!u||/(?:v=|youtu\.be\/|shorts\/|embed\/)[\w-]{11}/.test(u);
+const okLink=u=>!u||/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)[\w-]{11}/.test(u);
+const okLessonLink=u=>!u||okLink(u)||/^https:\/\/\S+$/.test(u);
 const save=()=>{try{localStorage.setItem(DK,JSON.stringify(C))}catch(e){}};
 const inp=(p,l,v,t)=>`<label>${l}<input data-p="${p}" type="${t||"text"}" value="${esc(v)}"></label>`;
 const SECS=[["menu","Menu order"],["posts","Create post & updates"],["faqs","Answered questions"],["msgs","Visitor messages"],["lessons","Lesson videos"],["groups","Lesson groups"],["uploads","File uploads"],["hac","Latest videos: VAULT HAC"],["disc","Latest videos: VAULT DISCOVERIES"],["platforms","Online platforms"],["form","Message form link"]];
@@ -126,7 +127,7 @@ $("#app").addEventListener("click",e=>{
   save();draw();
 });
 function fixPlatforms(){C.platforms.forEach(p=>{let u=String(p.url||"").trim();if(u&&!/^https?:\/\//i.test(u)&&/^[\w.-]+\.[a-z]{2,}/i.test(u))u="https://"+u;p.url=u;p.handle=String(p.handle||"").trim()})}
-function problems(){fixPlatforms();const bad=[];C.lessons.forEach(l=>{if(!okLink(l.video))bad.push(l.title)});["hac","disc"].forEach(k=>(C.latest[k]||[]).forEach(v=>{if(!v.url||!okLink(v.url))bad.push(v.title||"A latest video")}));C.platforms.forEach(p=>{if(p.live&&!p.handle&&!p.url)bad.push((p.name||"A platform")+" is switched on. Add a handle or a link (either one).");if(p.live&&p.url&&!/^https:\/\//.test(p.url))bad.push((p.name||"A platform")+" link must start with https://")});return bad}
+function problems(){fixPlatforms();const bad=[];C.lessons.forEach(l=>{l.video=String(l.video||"").trim();if(!okLessonLink(l.video))bad.push("Lesson \""+(l.title||"untitled")+"\": the video link must be a YouTube link, or any link that starts with https://")});["hac","disc"].forEach(k=>(C.latest[k]||[]).forEach(v=>{if(!v.url||!okLink(v.url))bad.push("Latest video \""+(v.title||"untitled")+"\": add a YouTube link")}));C.platforms.forEach(p=>{if(p.live&&!p.handle&&!p.url)bad.push((p.name||"A platform")+" is switched on. Add a handle or a link (either one).");if(p.live&&p.url&&!/^https:\/\//.test(p.url))bad.push((p.name||"A platform")+" link must start with https://")});return bad}
 const out=()=>{const bad=problems();if(bad.length){alert("Fix these first:\n"+bad.join("\n"));return null}return JSON.stringify(C,null,1)};
 $("#dl").onclick=()=>{const j=out();if(!j)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([j],{type:"application/json"}));a.download="content.json";a.click()};
 $("#cp").onclick=async()=>{const j=out();if(!j)return;try{await navigator.clipboard.writeText(j);$("#st").textContent="Copied."}catch(e){$("#st").textContent="Copy failed. Use Download instead."}};

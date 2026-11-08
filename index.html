@@ -168,7 +168,7 @@ const G = "https://www.gstatic.com/firebasejs/10.14.1";
 const CH = {hac:"https://www.youtube.com/@vaulthac", disc:"https://www.youtube.com/@vaultdiscoveries"};
 const $ = s => document.querySelector(s);
 const esc = s => String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const ytId = u => { const m = (u||"").match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/); return m ? m[1] : ""; };
+const ytId = u => { const m = (u||"").match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/); return m ? m[1] : ""; };
 const watch = id => "https://www.youtube.com/watch?v=" + id;
 
 function thumb(id, label){
@@ -185,6 +185,7 @@ function openLesson(lid){
   const el = document.createElement("div"); el.id = "lsheet"; el.className = "sheet"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
   el.innerHTML = `<div class="sbox"><button class="sx" data-close="1" aria-label="Close">✕</button><h3>${esc(l.title)}</h3>`
     + (id ? thumb(id, l.videoTitle || l.title) + (l.videoTitle ? `<p class="vt">${esc(l.videoTitle)}</p>` : "") + `<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener" style="margin-top:8px">Watch on YouTube</a>` : "")
+    + (!id && /^https:\/\/\S+$/.test(l.video || "") ? `<a class="btn main" href="${esc(l.video)}" target="_blank" rel="noopener">Watch the video</a>` : "")
     + (l.text ? `<p style="margin-top:12px">${esc(l.text)}</p>` : "")
     + (goals.length ? `<ul>${goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>` : "")
     + (files.length ? `<div class="files"><strong>Files</strong>${files.map(f => `<a class="btn" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.name || "Download file")}</a>`).join("")}</div>` : "")
