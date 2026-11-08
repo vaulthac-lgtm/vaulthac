@@ -84,6 +84,7 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 .reader p{margin:0 0 1em}
 .reader .rh1{font-size:1.3em;margin:1.5em 0 .5em;line-height:1.3}
 .reader .rh2{font-size:1.12em;margin:1.3em 0 .4em;line-height:1.3}
+.reader blockquote{margin:0 0 1em;padding:.2em 1em;border-left:4px solid var(--cyan);color:var(--mut)}.reader hr{border:0;border-top:1px solid var(--line);margin:1.4em 0}.reader a{color:var(--cyan)}
 .reader ul,.reader ol{margin:0 0 1em 1.3em;padding:0}.reader li{margin:0 0 .4em}
 [hidden]{display:none!important}
 
@@ -197,13 +198,15 @@ function lessonTile(l){
   if (nf) tags.push(nf + (nf > 1 ? " files" : " file"));
   return `<button class="ltile" data-lid="${esc(l.id)}"><span class="lth">${id ? `<img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""><span class="lplay" aria-hidden="true">▶</span>` : '<span class="lnone">LESSON</span>'}</span><span class="ltt">${esc(l.title)}</span>${tags.length ? `<span class="ltags">${tags.map(t => `<span class="ltag">${t}</span>`).join("")}</span>` : ""}</button>`;
 }
-const inl = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+const inl = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>").replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 function fmt(text) {
   let html = "", list = null;
   const flush = () => { if (list) { html += `<${list.t}>${list.items.map(x => `<li>${inl(x)}</li>`).join("")}</${list.t}>`; list = null; } };
   String(text || "").replace(/\r/g, "").split("\n").forEach(raw => {
     const t = raw.trim(); let m;
     if (!t) { flush(); return; }
+    if (/^(-{3,}|_{3,})$/.test(t)) { flush(); html += "<hr>"; return; }
+    if ((m = t.match(/^>\s?(.+)$/))) { flush(); html += `<blockquote>${inl(m[1])}</blockquote>`; return; }
     if ((m = t.match(/^(#{1,3})\s+(.+)$/))) { flush(); html += `<h3 class="${m[1].length === 1 ? "rh1" : "rh2"}">${inl(m[2])}</h3>`; return; }
     if ((m = t.match(/^[-*\u2022]\s+(.+)$/))) { if (!list || list.t !== "ul") { flush(); list = {t:"ul", items:[]}; } list.items.push(m[1]); return; }
     if ((m = t.match(/^\d+[.)]\s+(.+)$/))) { if (!list || list.t !== "ol") { flush(); list = {t:"ol", items:[]}; } list.items.push(m[1]); return; }
