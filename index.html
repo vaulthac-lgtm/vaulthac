@@ -70,6 +70,21 @@ header{position:sticky}#mp{position:absolute;right:12px;top:100%;width:min(290px
 .sbox h3{margin:0 40px 10px 0}
 .sx{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--text);font-size:1.1rem;cursor:pointer}
 .sbox .files{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.ltags{display:flex;gap:6px;padding:0 10px 9px;flex-wrap:wrap}
+.ltag{font-size:.65rem;border:1px solid var(--line);border-radius:99px;padding:1px 7px;color:var(--mut)}
+.sbox{max-width:700px;max-height:94vh}
+.tags2{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.tags2 span{font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--mut)}
+.intro{font-style:italic;color:var(--mut);margin:12px 0}
+.learn{border-left:4px solid var(--cyan);background:rgba(var(--rgb),.07);padding:10px 14px;border-radius:6px;margin:12px 0}
+.learn strong{display:block;margin-bottom:4px}.learn ul{margin:0 0 0 1.1em;padding:0}
+.rbar{display:flex;gap:8px;align-items:center;margin:18px 0 6px;color:var(--mut);font-size:.8rem;border-top:1px solid var(--line);padding-top:12px}
+.rbar button{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:6px;padding:4px 12px;cursor:pointer;font:inherit}
+.reader{font-family:Georgia,"Times New Roman",serif;font-size:var(--rs,1.05rem);line-height:1.8}
+.reader p{margin:0 0 1em}
+.reader .rh1{font-size:1.3em;margin:1.5em 0 .5em;line-height:1.3}
+.reader .rh2{font-size:1.12em;margin:1.3em 0 .4em;line-height:1.3}
+.reader ul,.reader ol{margin:0 0 1em 1.3em;padding:0}.reader li{margin:0 0 .4em}
 [hidden]{display:none!important}
 
 section{padding:28px 16px}
@@ -107,20 +122,21 @@ section{scroll-margin-top:66px}
 <section id="home" class="hero"><h1>Learn Technology. Master the Basics. Understand the Markets.</h1><p>Welcome to VAULT HAC. Learn digital skills, cybersecurity awareness and technology through simple lessons and videos.</p><img class="ban" src="welcome.webp" alt="VAULT HAC. Learn, Trade, Grow. Protect, Innovate and Empower. Computer Basics and Forex Trading Basics." width="1280" height="720" style="margin:0;max-width:1100px"><p class="tag" style="margin:12px 0 0">Protect. Innovate. Empower.</p></section>
 
 <section id="latest"><h2>Latest Videos</h2><p class="sub" style="margin-bottom:12px">Tap a video to play it. Slide sideways for more.</p>
-<h3 class="grp" style="font-size:1rem;margin:10px 0 6px">VAULT HAC</h3><div class="hrow" id="l-hac"></div>
-<h3 class="grp" style="font-size:1rem;margin:10px 0 6px">VAULT DISCOVERIES</h3><div class="hrow" id="l-disc"></div></section>
+<h3 class="grp" style="font-size:1rem;margin:10px 0 6px">VAULT DISCOVERIES</h3><div class="hrow" id="l-disc"></div>
+<h3 class="grp" style="font-size:1rem;margin:10px 0 6px">VAULT HAC</h3><div class="hrow" id="l-hac"></div></section>
 
 <section id="lessons"><h2>Lessons</h2><p class="sub">New lessons are added regularly.</p><div id="g-lessons"></div></section>
 
 <section id="videos"><h2>Video Lessons</h2><p class="sub">Every lesson that has a matching video on the VAULT HAC channel.</p><img class="ban sm" src="video-learning.webp" alt="Learn through videos: watch, learn, apply" width="492" height="221" loading="lazy" style="margin-bottom:18px"><div class="lgrid" id="g-videos"></div></section>
 
-<section id="channels"><h2>YouTube Channels</h2><a href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener" aria-label="Join VAULT HAC on YouTube"><img class="ban sm" src="join.webp" alt="Join VAULT HAC today. Learn, upgrade, achieve." width="507" height="243" loading="lazy" style="margin-bottom:20px"></a>
+<section id="channels"><h2>YouTube Channels</h2>
 <div class="two">
-<div class="card"><h3>VAULT HAC</h3><p>Computer basics, technology, cybersecurity awareness, digital education, and beginner forex support and resistance lessons.</p>
-<div class="row"><a class="btn main" href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">Subscribe to VAULT HAC</a><a class="btn" href="https://www.youtube.com/@vaulthac/videos" target="_blank" rel="noopener">Watch Latest Videos</a><a class="btn" href="https://www.youtube.com/@vaulthac/playlists" target="_blank" rel="noopener">Explore Video Lessons</a></div></div>
 <div class="card"><h3>VAULT DISCOVERIES</h3><p>Amazing facts, technology discoveries, mysteries, fascinating places, rankings, and educational entertainment.</p>
 <div class="row"><a class="btn main" href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">Subscribe to VAULT DISCOVERIES</a><a class="btn" href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">Explore Discoveries</a><a class="btn" href="https://www.youtube.com/@vaultdiscoveries/videos" target="_blank" rel="noopener">Watch Videos</a></div></div>
-</div></section>
+<div class="card"><h3>VAULT HAC</h3><p>Computer basics, technology, cybersecurity awareness, digital education, and beginner forex support and resistance lessons.</p>
+<div class="row"><a class="btn main" href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">Subscribe to VAULT HAC</a><a class="btn" href="https://www.youtube.com/@vaulthac/videos" target="_blank" rel="noopener">Watch Latest Videos</a><a class="btn" href="https://www.youtube.com/@vaulthac/playlists" target="_blank" rel="noopener">Explore Video Lessons</a></div></div>
+</div>
+<a href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener" aria-label="Join VAULT HAC on YouTube"><img class="ban sm" src="join.webp" alt="Join VAULT HAC today. Learn, upgrade, achieve." width="507" height="243" loading="lazy" style="margin-top:20px"></a></section>
 
 <section id="platforms"><h2>Online Platforms</h2><div class="chips" id="g-plat"></div></section>
 
@@ -174,26 +190,51 @@ const watch = id => "https://www.youtube.com/watch?v=" + id;
 function thumb(id, label){
   return `<button class="thumb" data-id="${id}" aria-label="Play video: ${esc(label)}"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt=""><span class="play" aria-hidden="true">▶</span></button>`;
 }
+const readMin = t => Math.max(1, Math.round(String(t||"").trim().split(/\s+/).length / 200));
 function lessonTile(l){
-  const id = ytId(l.video);
-  return `<button class="ltile" data-lid="${esc(l.id)}"><span class="lth">${id ? `<img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""><span class="lplay" aria-hidden="true">▶</span>` : '<span class="lnone">LESSON</span>'}</span><span class="ltt">${esc(l.title)}</span></button>`;
+  const id = ytId(l.video), nf = (l.files || []).filter(f => f && f.url).length, tags = [];
+  if (l.content && l.content.trim()) tags.push(`Read ${readMin(l.content)} min`);
+  if (nf) tags.push(nf + (nf > 1 ? " files" : " file"));
+  return `<button class="ltile" data-lid="${esc(l.id)}"><span class="lth">${id ? `<img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""><span class="lplay" aria-hidden="true">▶</span>` : '<span class="lnone">LESSON</span>'}</span><span class="ltt">${esc(l.title)}</span>${tags.length ? `<span class="ltags">${tags.map(t => `<span class="ltag">${t}</span>`).join("")}</span>` : ""}</button>`;
 }
+const inl = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+function fmt(text) {
+  let html = "", list = null;
+  const flush = () => { if (list) { html += `<${list.t}>${list.items.map(x => `<li>${inl(x)}</li>`).join("")}</${list.t}>`; list = null; } };
+  String(text || "").replace(/\r/g, "").split("\n").forEach(raw => {
+    const t = raw.trim(); let m;
+    if (!t) { flush(); return; }
+    if ((m = t.match(/^(#{1,3})\s+(.+)$/))) { flush(); html += `<h3 class="${m[1].length === 1 ? "rh1" : "rh2"}">${inl(m[2])}</h3>`; return; }
+    if ((m = t.match(/^[-*\u2022]\s+(.+)$/))) { if (!list || list.t !== "ul") { flush(); list = {t:"ul", items:[]}; } list.items.push(m[1]); return; }
+    if ((m = t.match(/^\d+[.)]\s+(.+)$/))) { if (!list || list.t !== "ol") { flush(); list = {t:"ol", items:[]}; } list.items.push(m[1]); return; }
+    flush(); html += `<p>${inl(t)}</p>`;
+  });
+  flush(); return html;
+}
+const RS = [0.9, 1.0, 1.1, 1.25, 1.45, 1.7];
+const rsIdx = () => { const n = parseInt(ls.get("vh-rs"), 10); return n >= 0 && n < RS.length ? n : 2; };
+function applyRS(el) { el.style.setProperty("--rs", RS[rsIdx()] + "rem"); }
 function closeLesson(){ const x = $("#lsheet"); if (x && x.remove) x.remove(); document.body.style.overflow = ""; }
 function openLesson(lid){
   const l = LESSONS.find(x => x.id === lid); if (!l) return; closeLesson();
-  const id = ytId(l.video), goals = (l.goals || []).filter(Boolean), files = (l.files || []).filter(f => f && f.url);
+  const id = ytId(l.video), goals = (l.goals || []).filter(Boolean), files = (l.files || []).filter(f => f && f.url), body = (l.content || "").trim();
+  const tags = []; if (body) tags.push(`Read ${readMin(body)} min`); if (files.length) tags.push(files.length + (files.length > 1 ? " files" : " file"));
   const el = document.createElement("div"); el.id = "lsheet"; el.className = "sheet"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
   el.innerHTML = `<div class="sbox"><button class="sx" data-close="1" aria-label="Close">✕</button><h3>${esc(l.title)}</h3>`
+    + (tags.length ? `<div class="tags2">${tags.map(t => `<span>${t}</span>`).join("")}</div>` : "")
     + (id ? thumb(id, l.videoTitle || l.title) + (l.videoTitle ? `<p class="vt">${esc(l.videoTitle)}</p>` : "") + `<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener" style="margin-top:8px">Watch on YouTube</a>` : "")
     + (!id && /^https:\/\/\S+$/.test(l.video || "") ? `<a class="btn main" href="${esc(l.video)}" target="_blank" rel="noopener">Watch the video</a>` : "")
-    + (l.text ? `<p style="margin-top:12px">${esc(l.text)}</p>` : "")
-    + (goals.length ? `<ul>${goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>` : "")
+    + (l.text ? `<p class="intro">${esc(l.text)}</p>` : "")
+    + (goals.length ? `<div class="learn"><strong>What you will learn</strong><ul>${goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>` : "")
+    + (body ? `<div class="rbar"><span>Reading size</span><button data-rs="-1" aria-label="Smaller text">A−</button><button data-rs="1" aria-label="Larger text">A+</button></div><div class="reader" id="reader">${fmt(body)}</div>` : "")
     + (files.length ? `<div class="files"><strong>Files</strong>${files.map(f => `<a class="btn" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.name || "Download file")}</a>`).join("")}</div>` : "")
     + `</div>`;
   document.body.appendChild(el); document.body.style.overflow = "hidden";
+  const rd = el.querySelector && el.querySelector("#reader"); if (rd) applyRS(rd);
 }
 document.addEventListener("click", e => {
   const t = e.target.closest && e.target.closest(".ltile"); if (t) { openLesson(t.dataset.lid); return; }
+  const rb = e.target.closest && e.target.closest("[data-rs]"); if (rb) { const n = Math.min(RS.length - 1, Math.max(0, rsIdx() + (+rb.dataset.rs))); ls.set("vh-rs", n); const rd = $("#reader"); if (rd) applyRS(rd); return; }
   if (e.target.closest && e.target.closest("[data-close]")) { closeLesson(); return; }
   const sh = $("#lsheet"); if (sh && e.target === sh) closeLesson();
 });
@@ -207,9 +248,9 @@ const known=new Set(GROUPS.map(g => g.id)), gl=GROUPS.slice();
 if (LESSONS.some(l => !known.has(l.cat))) gl.push({id:"__other",name:"Other lessons"});
 const inG=(g,l) => g.id==="__other" ? !known.has(l.cat) : l.cat===g.id;
 const groupHtml=g => {
-  const L=LESSONS.filter(l => inG(g,l)), im=IMGS.find(x => x[0].test(g.name));
-  if (!L.length && !im) return "";
-  const top = im ? `<img class="ban sm" src="${im[1]}.webp" alt="${im[2]}" width="${im[3]}" height="${im[4]}" loading="lazy" style="margin-bottom:14px">` : `<h3 class="grp">${esc(g.name)}</h3>`;
+  const L=LESSONS.filter(l => inG(g,l)), im=IMGS.find(x => x[0].test(g.name)), cu=/^https:\/\/\S+$/.test(g.image || "") ? g.image : "";
+  if (!L.length && !im && !cu) return "";
+  const top = cu ? `<img class="ban sm" src="${esc(cu)}" alt="${esc(g.name)}" loading="lazy" style="margin-bottom:14px;width:100%;height:auto">` : im ? `<img class="ban sm" src="${im[1]}.webp" alt="${im[2]}" width="${im[3]}" height="${im[4]}" loading="lazy" style="margin-bottom:14px">` : `<h3 class="grp">${esc(g.name)}</h3>`;
   const body = L.length ? `<div class="lgrid">${L.map(lessonTile).join("")}</div>` : '<p class="empty">Lessons coming soon.</p>';
   const sr = isFx(g.name) && L.length ? '<img class="ban sm" src="support-resistance.webp" alt="Support and resistance: trade with confidence" width="503" height="221" loading="lazy" style="margin-top:18px">' : "";
   return `<div style="margin-bottom:34px">${top}${body}${sr}</div>`;
